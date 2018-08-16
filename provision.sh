@@ -56,9 +56,16 @@ apt-get update
 apt-get install -y git vim
 
 info "Installing dotfiles ..."
+cd
 git clone 'https://github.com/jpducassou/dotfiles'
+rm "${HOME}/.profile"
+rm "${HOME}/.bashrc"
 cd dotfiles
 ./install.sh
+
+info "Installing basic packages ..."
+cd
+cat dotfiles/packages/01-basic.lst | grep -vh '#' | xargs apt-get install -y
 
 # implementation here
 info "Provisioning done."
