@@ -53,6 +53,7 @@ function _log() {
 # Main
 # ============================================================================
 RUBY_VERSION='2.5.1'
+RAILS_VERSION='5.2.0'
 
 info "Updating package db and installing git & vim ..."
 sudo apt-get update
@@ -99,6 +100,10 @@ gem install bundler
 rbenv rehash
 
 ruby -v
+
+info "Installing rails ..."
+gem install rails -v "${RAILS_VERSION}"
+rails -v
 
 info "Installing node ..."
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
