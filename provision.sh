@@ -77,6 +77,9 @@ cat dotfiles/packages/03-devel.lst | grep -vh '#' | xargs sudo apt-get install -
 info "Installing PostgreSQL ..."
 sudo apt-get install postgresql
 
+info "Installing SQLite ..."
+sudo apt-get install -y libsqlite3-dev sqlite3
+
 info "Installing ruby dependencies ..."
 sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
 
