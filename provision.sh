@@ -52,6 +52,7 @@ function _log() {
 # ============================================================================
 # Main
 # ============================================================================
+RUBY_VERSION='2.5.1'
 
 info "Updating package db and installing git & vim ..."
 sudo apt-get update
@@ -72,7 +73,35 @@ cat dotfiles/packages/01-basic.lst | grep -vh '#' | xargs sudo apt-get install -
 info "Installing devel packages ..."
 cat dotfiles/packages/03-devel.lst | grep -vh '#' | xargs sudo apt-get install -y
 
-info "Installing ruby  ..."
+info "Installing PostgreSQL ..."
+sudo apt-get install postgresql
+
+info "Installing ruby dependencies ..."
+sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
+
+info "Installing rbenv & ruby ..."
+cd
+git clone 'https://github.com/rbenv/rbenv.git'      "${HOME}/.rbenv"
+git clone 'https://github.com/rbenv/ruby-build.git' "${HOME}/.rbenv/plugins/ruby-build"
+
+cat << 'EOF' > "${HOME}/.bash_post"
+export PATH="${HOME}/.rbenv/bin:${PATH}"
+eval "$(rbenv init -)"
+export PATH="${HOME}/.rbenv/plugins/ruby-build/bin:${PATH}"
+EOF
+
+source "${HOME}/.bash_post"
+
+rbenv install "${RUBY_VERSION}"
+rbenv global  "${RUBY_VERSION}"
+
+gem install bundler
+rbenv rehash
+
+ruby -v
+
+info "Installing Heroky toolbelt ..."
+sudo wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 # implementation here
 info "Provisioning done."
