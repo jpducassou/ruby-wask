@@ -100,6 +100,10 @@ rbenv rehash
 
 ruby -v
 
+info "Installing node ..."
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
 info "Installing Heroky toolbelt ..."
 sudo wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
