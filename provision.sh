@@ -52,8 +52,10 @@ function _log() {
 # ============================================================================
 # Main
 # ============================================================================
-apt-get update
-apt-get install -y git vim
+
+info "Updating package db and installing git & vim ..."
+sudo apt-get update
+sudo apt-get install -y git vim
 
 info "Installing dotfiles ..."
 cd
@@ -65,7 +67,12 @@ cd dotfiles
 
 info "Installing basic packages ..."
 cd
-cat dotfiles/packages/01-basic.lst | grep -vh '#' | xargs apt-get install -y
+cat dotfiles/packages/01-basic.lst | grep -vh '#' | xargs sudo apt-get install -y
+
+info "Installing devel packages ..."
+cat dotfiles/packages/03-devel.lst | grep -vh '#' | xargs sudo apt-get install -y
+
+info "Installing ruby  ..."
 
 # implementation here
 info "Provisioning done."

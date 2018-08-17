@@ -68,6 +68,6 @@ Vagrant.configure("2") do |config|
   # SHELL
 
   # Provision through shell script
-  config.vm.provision :shell, path: "provision.sh"
+  config.vm.provision :shell, path: "provision.sh", privileged: false
 
 end
