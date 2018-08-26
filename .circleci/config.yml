@@ -27,6 +27,11 @@ jobs:
           - v1-dependencies-
 
       - run:
+          name: install or update bundler
+          command: |
+            cd todos-api && gem install bundler
+
+      - run:
           name: install dependencies
           command: |
             cd todos-api && bundle install --jobs=4 --retry=3 --path vendor/bundle
