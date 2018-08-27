@@ -1,4 +1,5 @@
 AllCops:
+  TargetRubyVersion: 2.5
   DisplayCopNames: true
   Exclude:
     - 'db/**/*'
@@ -7,15 +8,56 @@ AllCops:
     - 'bin/**/*'
     - 'log/**/*'
 
+Documentation:
+  Enabled: false
+
+IndentationConsistency:
+  EnforcedStyle: 'rails'
+
+Rails:
+  Enabled: true
+
 Metrics/LineLength:
   Max: 120
 
 Metrics/MethodLength:
   Max: 25
 
-Rails:
-  Enabled: true
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*.rb'
+    - 'db/**/*.rb'
+    - 'lib/**/*.rake'
+    - 'spec/**/*'
 
 Bundler/OrderedGems:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - 'Gemfile'
+    - 'Guardfile'
+    - 'Rakefile'
+
+Layout/TrailingBlankLines:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
 
