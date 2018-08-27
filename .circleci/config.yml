@@ -45,6 +45,12 @@ jobs:
       - run: cd todos-api && bundle exec rake db:create
       - run: cd todos-api && bundle exec rake db:schema:load
 
+      # run rubocop!
+      - run:
+          name: run rubocop
+          command: |
+            cd todos-api && bundle exec rubocop
+
       # run tests!
       - run:
           name: run tests
