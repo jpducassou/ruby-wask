@@ -21,6 +21,9 @@
 /storage/*
 !/storage/.keep
 
+# Ignore vendor files
+/vendor
+
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
