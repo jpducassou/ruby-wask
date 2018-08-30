@@ -74,14 +74,17 @@ cat dotfiles/packages/01-basic.lst | grep -vh '#' | xargs sudo apt-get install -
 info "Installing devel packages ..."
 cat dotfiles/packages/03-devel.lst | grep -vh '#' | xargs sudo apt-get install -y
 
-info "Installing PostgreSQL ..."
-sudo apt-get install postgresql
+info "Installing ruby dependencies ..."
+sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
 
 info "Installing SQLite ..."
 sudo apt-get install -y libsqlite3-dev sqlite3
 
-info "Installing ruby dependencies ..."
-sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
+info "Installing PostgreSQL ..."
+sudo apt-get install postgresql
+
+info "Installing PostgreSQL lib ..."
+sudo apt-get install -y libpq-dev
 
 info "Installing rbenv & ruby ..."
 cd
