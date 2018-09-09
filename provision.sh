@@ -86,18 +86,15 @@ sudo apt-get install postgresql
 info "Installing PostgreSQL lib ..."
 sudo apt-get install -y libpq-dev
 
+# ============================================================================
+# Ruby && Rails
+# ============================================================================
 info "Installing rbenv & ruby ..."
 cd
 git clone 'https://github.com/rbenv/rbenv.git'      "${HOME}/.rbenv"
 git clone 'https://github.com/rbenv/ruby-build.git' "${HOME}/.rbenv/plugins/ruby-build"
 
-cat << 'EOF' > "${HOME}/.bash_post"
-export PATH="${HOME}/.rbenv/bin:${PATH}"
-eval "$(rbenv init -)"
-export PATH="${HOME}/.rbenv/plugins/ruby-build/bin:${PATH}"
-EOF
-
-source "${HOME}/.bash_post"
+source "${HOME}/.bashrc"
 
 rbenv install "${RUBY_VERSION}"
 rbenv global  "${RUBY_VERSION}"
@@ -111,13 +108,33 @@ info "Installing rails ..."
 gem install rails -v "${RAILS_VERSION}"
 rails -v
 
-info "Installing node ..."
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-sudo apt-get install -y nodejs
+# ============================================================================
+# Nvm && Node && yarn
+# ============================================================================
+info "Installing nvm ..."
+export NVM_DIR="${HOME}/.nvm"
+git clone 'https://github.com/creationix/nvm.git' "${NVM_DIR}"
+pushd "${NVM_DIR}"
+git checkout $(git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1))
+popd
 
+. "${NVM_DIR}/nvm.sh"
+
+info "Installing node ..."
+nvm install 8.11.4
+nvm use 8.11.4
+nvm alias default v8.11.4
+npm install -g yarn
+
+node -v
+yarn -v
+
+# ============================================================================
+# Heroku
+# ============================================================================
 info "Installing Heroky toolbelt ..."
 sudo wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-# implementation here
+# ============================================================================
 info "Provisioning done."
 
